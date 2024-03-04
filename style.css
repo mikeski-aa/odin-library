@@ -16,4 +16,15 @@ body {
 
 .mainContent {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 0.2fr));
+    gap: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.card {
+    background-color: peachpuff;
+    height:fit-content;
+    border-radius: 12px;
+   
 }
