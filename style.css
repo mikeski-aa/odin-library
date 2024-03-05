@@ -34,6 +34,7 @@ form {
     /* visibility:hidden;
     height: 0; */
     display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .card {
     background-color: peachpuff;

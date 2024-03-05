@@ -49,6 +49,8 @@ function newCard(book){
     readButton.classList.add('readToggle');
     readButton.textContent = 'Read?'
 
+//can this be shortened?? V UGLY!
+
     newCard.appendChild(newPone);
     newCard.appendChild(newPtwo);
     newCard.appendChild(newPthree);
@@ -59,10 +61,51 @@ function newCard(book){
     container.appendChild(newCard);   
 }
 
-/////prevent submit from submitting
-submitBtn.addEventListener('click', preventClk, false);
+//toggle checker for the read value
+let i = 0;
+let bkRead = document.querySelector('#choiceOne');
+bkRead.addEventListener('click', function() { 
+    if (i===0){
+        console.log('Toggle On!')
+        return i = 1;
+    } else {
+        console.log('Toggle Off!');
+        return i = 0;
+    }
+    })
 
-function preventClk(event) {
-    console.log('BAD!')
-    event.preventDefault();
+/////submit form logic
+submitBtn.addEventListener('click', createNewBook);
+
+function createNewBook(event) {
+    console.log('BAD!');
+    
+    let bkTitle = document.querySelector('#title');
+    let bkAuth = document.querySelector('#author');
+    let bkLngth = document.querySelector('#bLength');
+    
+    
+
+//if input fields are not empty, prevent default button behaviour and submit the values, afterwards reset the values
+
+    if (bkTitle.value === "" || bkAuth.value === "" || bkLngth.value === "") {
+        return;
+    } else {
+        event.preventDefault();
+        console.log(bkTitle.value);
+        console.log(bkAuth.value);
+        console.log(bkLngth.value);
+        console.log(i);
+        rstVals(bkTitle, bkAuth, bkLngth, bkRead);
+    }
+    
+}
+
+//reset values function
+function rstVals(bkTitle, bkAuth, bkLngth){
+    bkTitle.value = "";
+    bkAuth.value = "";
+    bkLngth.value = "";
+    document.querySelector('#choiceOne').checked = false;
+    i = 0;
 }
