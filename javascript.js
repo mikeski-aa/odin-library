@@ -26,7 +26,7 @@ function newCard(book){
     let newCard = document.createElement('div');
     newCard.classList.add('card');
 
-// create new line for each part of the book object values
+// create new line for each part of the book object values including placeholder buttons
     let newPone = document.createElement('p');
     newPone.textContent = `Title: ${book.title}`;
 
@@ -39,10 +39,20 @@ function newCard(book){
     let newPfour = document.createElement('p');
     newPfour.textContent = `Read: ${book.read}`;
 
+    let delButton = document.createElement('button');
+    delButton.classList.add('del');
+    delButton.textContent = 'Delete'
+
+    let readButton = document.createElement('button');
+    readButton.classList.add('readToggle');
+    readButton.textContent = 'Read?'
+
     newCard.appendChild(newPone);
     newCard.appendChild(newPtwo);
     newCard.appendChild(newPthree);
     newCard.appendChild(newPfour);
+    newCard.appendChild(delButton);
+    newCard.appendChild(readButton);
 
     container.appendChild(newCard);
    
