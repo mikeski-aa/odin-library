@@ -3,6 +3,7 @@ const container = document.querySelector('.mainContent');
 const submitBtn = document.querySelector('#submitForm')
 const addNewBookBtn = document.querySelector('.newBookForm')
 
+
 // constructor function for each new book
 function Book(title, author, pagenum, read) {
     this.title = title,
@@ -32,10 +33,6 @@ const book5 = new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez'
 
 
     
-
-
-
-
 //function to add new book into the library
 function addBook(newBook){
     myLibrary.push(newBook);
@@ -150,3 +147,14 @@ addNewBookBtn.addEventListener('click', function(){
     addNewBookBtn.textContent = 'Click me to hide form';
 }
 })
+// testing();
+//test delete button functionality
+// function testing() {
+container.addEventListener('click', e => {
+    console.log(e.target.parentNode);
+    if (e.target.textContent === 'Delete') {
+        alert(`You just clicked delete! ${e.target.parentNode.textContent}`);
+        container.removeChild(e.target.parentNode);
+    }
+})
+
