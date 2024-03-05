@@ -31,8 +31,8 @@ body {
     
 }
 form {
-    /* visibility:hidden;
-    height: 0; */
+    visibility:hidden;
+    height: 0; 
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
