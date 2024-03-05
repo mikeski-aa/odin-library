@@ -1,5 +1,7 @@
 const myLibrary = [];
 const container = document.querySelector('.mainContent');
+const submitBtn = document.querySelector('#submitForm')
+const addNewBookBtn = document.querySelector('.newBookForm')
 
 // constructor function for each new book
 function Book(title, author, pagenum, read) {
@@ -54,8 +56,13 @@ function newCard(book){
     newCard.appendChild(delButton);
     newCard.appendChild(readButton);
 
-    container.appendChild(newCard);
-   
-    
+    container.appendChild(newCard);   
 }
 
+/////prevent submit from submitting
+submitBtn.addEventListener('click', preventClk, false);
+
+function preventClk(event) {
+    console.log('BAD!')
+    event.preventDefault();
+}

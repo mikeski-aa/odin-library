@@ -21,13 +21,20 @@ body {
     gap: 1rem;
     margin-left: 2rem;
     margin-right: 2rem;
+    
 }
 
 .mainTitle {
     display: grid;
     justify-content: center;
+    border: 5px solid black;
+    
 }
-
+form {
+    /* visibility:hidden;
+    height: 0; */
+    display: grid;
+}
 .card {
     background-color: peachpuff;
     height:fit-content;
