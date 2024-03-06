@@ -165,12 +165,14 @@ p, .boolVal {
     font-weight: bold;
 }
 #submitForm:hover, #resetForm:hover{
-    background-color: orange;
+    background-color: #5b21b6;
+    color: white;
    
 }
 button:hover {
     cursor: pointer;
-    background-color: orange;
+    background-color: #5b21b6;
+    color: white;
 }
 
 .btntest {
