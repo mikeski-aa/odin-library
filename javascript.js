@@ -1,33 +1,35 @@
-const myLibrary = [];
+let myLibrary = [];
 const container = document.querySelector('.mainContent');
 const submitBtn = document.querySelector('#submitForm')
 const addNewBookBtn = document.querySelector('.newBookForm')
+let j = 0;
+let offset = 0;
+let delItem = undefined;
+let k = 0;
 
 
 // constructor function for each new book
-function Book(title, author, pagenum, read) {
+function Book(title, author, pagenum, read, j) {
     this.title = title,
     this.author = author,
     this.pagenum = pagenum,
-    this.read = Boolean(read);
-    this.info = function(){
-        console.log(`Book title is ${this.title}, author is ${this.author}, length is ${this.pagenum}, is read ${read}  `)
-    };
+    this.read = Boolean(read),
+    this.id = j;
 }
-//testing the values displayed with some pre-determined values, set up default cards to show
-const book1 = new Book('The Hobbit', 'J. R. R. Tolkien', 295, true);
+// testing the values displayed with some pre-determined values, set up default cards to show
+const book1 = new Book('The Hobbit', 'J. R. R. Tolkien', 295, true, 0);
     addBook(book1);
     newCard(book1);
-const book2 = new Book('The Great Gatsby', 'F Scott Fitzgerald', 194, false);
+const book2 = new Book('The Great Gatsby', 'F Scott Fitzgerald', 194, false, 1);
     addBook(book2);
     newCard(book2);
-const book3 = new Book('1984', 'George Orwell', 267, false);
+const book3 = new Book('1984', 'George Orwell', 267, false, 2);
     addBook(book3);
     newCard(book3);
-const book4 = new Book('Lolita', 'Vladimir Nabokov', 317, false);
+const book4 = new Book('Lolita', 'Vladimir Nabokov', 317, false, 3);
     addBook(book4);
     newCard(book4);
-const book5 = new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez', 422, false);
+const book5 = new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez', 422, false, 4);
     addBook(book5);
     newCard(book5);
 
@@ -42,7 +44,7 @@ function addBook(newBook){
 //function to create a new card
 function newCard(book){
     let newCard = document.createElement('div');
-    newCard.classList.add('card');
+    newCard.classList.add(`card` + j);
 
 // create new line for each part of the book object values including placeholder buttons
     let newPone = document.createElement('p');
@@ -74,7 +76,8 @@ function newCard(book){
     newCard.appendChild(delButton);
     newCard.appendChild(readButton);
 
-    container.appendChild(newCard);   
+    container.appendChild(newCard);  
+    return j += 1; 
 }
 
 //toggle checker for the read value
@@ -112,7 +115,9 @@ function createNewBook(event) {
         let readVal = false;
         if (i === 1) {readVal = true};
 
-        let book = new Book(bkTitle.value, bkAuth.value, bkLngth.value, readVal);
+        j = myLibrary.length;
+
+        let book = new Book(bkTitle.value, bkAuth.value, bkLngth.value, readVal, j);
         addBook(book);
         newCard(myLibrary[myLibrary.length - 1]);
 
@@ -121,6 +126,7 @@ function createNewBook(event) {
         console.log(bkLngth.value);
         console.log(i);
         rstVals(bkTitle, bkAuth, bkLngth);
+        
     }
     
 }
@@ -147,14 +153,43 @@ addNewBookBtn.addEventListener('click', function(){
     addNewBookBtn.textContent = 'Click me to hide form';
 }
 })
-// testing();
-//test delete button functionality
-// function testing() {
+
+//test delete button functionality, delete specified item from array
 container.addEventListener('click', e => {
-    console.log(e.target.parentNode);
+    console.log(e.target.parentNode.classList);
     if (e.target.textContent === 'Delete') {
-        alert(`You just clicked delete! ${e.target.parentNode.textContent}`);
-        container.removeChild(e.target.parentNode);
-    }
-})
+        alert(`You just clicked delete! ${e.target.parentNode.classList}`);
+        let currcard = e.target.parentNode.classList.value;
+        
+
+//seperate value to get the index of the card and array element we want to delete 
+        let newcard = currcard.split('d');
+        
+        newcard[1] = +newcard[1]
+        console.log(typeof(newcard[1]));
+
+//if check to see if the item we want to delete next is before or after the item we deleted first
+
+        for (x of myLibrary) {
+            if (x.id == newcard[1]){
+                console.log(`The index we are deleting is:  ${myLibrary.indexOf(myLibrary[x.id])} 
+                the current ID of this index is: ${x.id}, the card number is ${newcard[1]}`);
+                myLibrary = myLibrary.filter((x) => x.id !== newcard[1]);
+                
+                container.removeChild(e.target.parentNode);
+                j -= 1;
+                return;
+            }
+        }
+        
+          
+        
+    }});
+        
+        
+    // for (x of myLibrary) {
+    //     console.log(`ID of array element is ${x.id}, 
+    //     the current index of this ID is ${myLibrary.indexOf(myLibrary[x.id])}`)
+    // }
+
 
