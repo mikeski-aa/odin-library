@@ -2,10 +2,10 @@ let myLibrary = [];
 const container = document.querySelector('.mainContent');
 const submitBtn = document.querySelector('#submitForm')
 const addNewBookBtn = document.querySelector('.newBookForm')
+
 let j = 0;
-let offset = 0;
-let delItem = undefined;
-let k = 0;
+
+
 
 
 // constructor function for each new book
@@ -56,7 +56,7 @@ function newCard(book){
     let newPthree = document.createElement('p');
     newPthree.textContent = `Length: ${book.pagenum}`;
 
-    let newPfour = document.createElement('p');
+    let newPfour = document.createElement('p' + j);
     newPfour.textContent = `Read: ${book.read}`;
 
     let delButton = document.createElement('button');
@@ -158,11 +158,13 @@ addNewBookBtn.addEventListener('click', function(){
 container.addEventListener('click', e => {
     console.log(e.target.parentNode.classList);
     if (e.target.textContent === 'Delete') {
-        alert(`You just clicked delete! ${e.target.parentNode.classList}`);
+
         let currcard = e.target.parentNode.classList.value;
         
 
 //seperate value to get the index of the card and array element we want to delete 
+// - convert newcard[1] to number fron string
+
         let newcard = currcard.split('d');
         
         newcard[1] = +newcard[1]
@@ -177,14 +179,47 @@ container.addEventListener('click', e => {
                 myLibrary = myLibrary.filter((x) => x.id !== newcard[1]);
                 
                 container.removeChild(e.target.parentNode);
+//-j counter is here to maintain correct order for new object.id values which can be created by user
+//when filling the new form
+
                 j -= 1;
                 return;
             }
-        }
+        } 
+    } else if (e.target.textContent === 'Read?') {
+  
+        let currcard = e.target.parentNode.classList.value;
         
-          
-        
-    }});
+
+//seperate value to get the index of the card and array element we want to delete 
+// - convert newcard[1] to number fron string
+
+        let newcard = currcard.split('d');
+        let para = document.querySelector(`p${newcard[1]}`);
+        newcard[1] = +newcard[1];
+        console.log(typeof(newcard[1]));
+        for (x of myLibrary) {
+            if (x.id == newcard[1]){
+                if (x.read === false) {
+                    console.log(para.textContent);
+                    para.textContent = 'Read: True'
+                    console.log('Read is False, toggle to true')
+                    x.read = true;
+                } else {
+                    console.log(para.textContent);
+                    para.textContent = 'Read: false'
+                    x.read = false;
+                    console.log('Read is True, toggle to False')
+                }
+                return;
+              
+                
+            }
+        } 
+    }
+    
+
+});
         
         
     // for (x of myLibrary) {
